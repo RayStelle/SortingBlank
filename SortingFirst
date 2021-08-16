@@ -1,0 +1,30 @@
+import random
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+def qsort(arr, l, r):
+    if r - l <= 1:
+        return
+   
+    mid = arr[random.randint(l, r - 1)]
+    x = l
+    y = l
+   
+    for i in range(l, r):
+        if arr[i] < mid:
+            arr[x], arr[i] = arr[i], arr[x]
+            if x != y:
+                arr[y], arr[i] = arr[i], arr[y]
+            x += 1
+            y += 1
+           
+        elif arr[i] == mid:
+            arr[y], arr[i] = arr[i], arr[y]
+            y += 1
+           
+    qsort(arr, l, x)
+    qsort(arr, y, r)
+
+qsort(arr, 0, len(arr))
+print(*arr)
